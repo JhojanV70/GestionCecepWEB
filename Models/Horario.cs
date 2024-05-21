@@ -7,7 +7,7 @@ namespace GestionCecepWEB.Models
         [Key]
         public int IdHorario { get; set; }
         public int IdCurso { get; set; } // FK
-        public string DiaSemana { get; set; }
+        public string DiaSemana { get; set; }               
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFin { get; set; }
     }
