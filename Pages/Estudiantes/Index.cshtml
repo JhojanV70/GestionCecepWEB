@@ -60,6 +60,7 @@
                     @Html.DisplayFor(modelItem => item.IdCurso)
                 </td>
                 <td>
+                    <a asp-page="./Edit" asp-route-id="@item.IdEstudiante" class="btn btn-warning">Edit</a>
                     <a asp-page="./Delete" asp-route-id="@item.IdEstudiante" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
