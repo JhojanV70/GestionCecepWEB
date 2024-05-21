@@ -1,0 +1,44 @@
+﻿@page
+@model GestionCecepWEB.Pages.Horarios.IndexModel
+@{
+    ViewData["Title"] = "Index Horarios";
+}
+<h1>Index Horarios</h1>
+<p>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Horarios[0].DiaSemana)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horarios[0].HoraInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horarios[0].HoraFin)
+            </th>            
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Horarios)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaSemana)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraFin)
+                </td>               
+                <td>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
