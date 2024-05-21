@@ -15,6 +15,6 @@ namespace GestionCecepWEB.Models
         public string Telefono { get; set; }
         public string Direccion { get; set; }
         public int IdCurso { get; set; } // FK
-        public Curso Curso { get; set; } // Propiedad de navegación
+        public Curso? Curso { get; set; } // Propiedad de navegación
     }
 }
