@@ -1,3 +1,6 @@
+using GestionCecepWEB.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace GestionCecepWEB
 {
     public class Program
@@ -8,6 +11,8 @@ namespace GestionCecepWEB
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddDbContext<GestionCecepContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GestionCecep")));
 
             var app = builder.Build();
 

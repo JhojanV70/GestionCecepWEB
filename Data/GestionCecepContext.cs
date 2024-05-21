@@ -5,6 +5,7 @@ namespace GestionCecepWEB.Data
 {
     public class GestionCecepContext : DbContext
     {
+        public GestionCecepContext(DbContextOptions options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Estudiante> Estudiantes { get; set; }
         public DbSet<Profesor> Profesores { get; set; }

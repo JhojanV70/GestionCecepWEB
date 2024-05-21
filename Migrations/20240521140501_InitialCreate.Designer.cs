@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionCecepWEB.Migrations
 {
     [DbContext(typeof(GestionCecepContext))]
-    [Migration("20240521045008_InitialProyect")]
-    partial class InitialProyect
+    [Migration("20240521140501_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
