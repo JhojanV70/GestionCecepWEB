@@ -12,9 +12,16 @@ namespace GestionCecepWEB
             // Add services to the container.
             builder.Services.AddRazorPages();
 
-            builder.Services.AddDbContext<GestionCecepContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GestionCecep")));
+            builder.Services.AddAuthentication().AddCookie("MyCookieAuth", options =>
+            {
+                options.Cookie.Name = "MyCookieAuth";
+                options.LoginPath = "/Account/Login";
+            });
+			
+            builder.Services.AddDbContext<GestionCecepContext>(options =>
+			options.UseSqlServer(builder.Configuration.GetConnectionString("GestionCecep")));
 
-            var app = builder.Build();
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
