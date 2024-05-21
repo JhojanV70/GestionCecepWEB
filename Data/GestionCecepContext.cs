@@ -1,0 +1,29 @@
+﻿using Microsoft.EntityFrameworkCore;
+using GestionCecepWEB.Models;
+using System.Collections.Generic;
+
+namespace GestionCecepWEB.Data
+{
+    internal class GestionCecepContext : DbContext
+    {
+        public GestionCecepContext(DbContextOptions<GestionCecepContext> options)
+            : base(options)
+        {
+        }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Estudiante> Estudiantes { get; set; }
+        public DbSet<Profesor> Profesores { get; set; }
+        public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Horario> Horarios { get; set; }
+        public DbSet<Calificacion> Calificaciones { get; set; }
+
+
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(
+                "Server=(localdb)\\mssqllocaldb;Database=GestionCecepWeb;Trusted_Connection=True;");
+        }
+    }
+}
