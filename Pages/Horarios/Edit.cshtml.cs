@@ -1,10 +1,10 @@
+using GestionCecepWEB.Data;
+using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using GestionCecepWEB.Data;
-using GestionCecepWEB.Models;
 
-namespace GestionCecepWEB.Pages.Estudiantes
+namespace GestionCecepWEB.Pages.Horarios
 {
     public class EditModel : PageModel
     {
@@ -14,21 +14,21 @@ namespace GestionCecepWEB.Pages.Estudiantes
             _context = context;
         }
         [BindProperty]
-        public Estudiante Estudiante { get; set; } = default!;
+        public Horario Horario { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null || _context.Horarios == null)
             {
                 return NotFound();
             }
 
-            var Estudiante = await _context.Estudiantes.FirstOrDefaultAsync(m => m.IdEstudiante == id);
-            if (Estudiante == null)
+            var Horario = await _context.Horarios.FirstOrDefaultAsync(m => m.IdHorario == id);
+            if (Horario == null)
             {
                 return NotFound();
             }
-            this.Estudiante = Estudiante;
+            this.Horario = Horario;
             return Page();
         }
 
@@ -39,7 +39,7 @@ namespace GestionCecepWEB.Pages.Estudiantes
                 return Page();
             }
 
-            _context.Attach(Estudiante).State = EntityState.Modified;
+            _context.Attach(Horario).State = EntityState.Modified;
 
             try
             {
@@ -47,7 +47,7 @@ namespace GestionCecepWEB.Pages.Estudiantes
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(Estudiante.IdEstudiante))
+                if (!CategoryExists(Horario.IdHorario))
                 {
                     return NotFound();
                 }
@@ -62,7 +62,7 @@ namespace GestionCecepWEB.Pages.Estudiantes
 
         private bool CategoryExists(int id)
         {
-            return (_context.Estudiantes?.Any(e => e.IdEstudiante == id)).GetValueOrDefault();
+            return (_context.Horarios?.Any(e => e.IdHorario == id)).GetValueOrDefault();
         }
     }
 }

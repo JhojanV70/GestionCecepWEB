@@ -1,0 +1,42 @@
+﻿@page
+@model GestionCecepWEB.Pages.Horarios.EditModel
+@{
+    ViewData["Title"] = "Edit Horarios";
+}
+<h1>Edit</h1>
+
+<h4>Horarios</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Horario.IdHorario" />
+            <div class="form-group">
+                <label asp-for="Horario.DiaSemana" class="control-label"></label>
+                <input asp-for="Horario.DiaSemana" class="form-control" />
+                <span asp-validation-for="Horario.DiaSemana" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Horario.HoraInicio" class="control-label"></label>
+                <input asp-for="Horario.HoraInicio" class="form-control" />
+                <span asp-validation-for="Horario.HoraInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Horario.HoraFin" class="control-label"></label>
+                <input asp-for="Horario.HoraFin" class="form-control" />
+                <span asp-validation-for="Horario.HoraFin" class="text-danger"></span>
+            </div>
+            <div class="form group">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-page="./index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
