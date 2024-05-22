@@ -1,10 +1,10 @@
+using GestionCecepWEB.Data;
+using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using GestionCecepWEB.Data;
-using GestionCecepWEB.Models;
 
-namespace GestionCecepWEB.Pages.Estudiantes
+namespace GestionCecepWEB.Pages.Horarios
 {
     public class DeleteModel : PageModel
     {
@@ -15,40 +15,40 @@ namespace GestionCecepWEB.Pages.Estudiantes
         }
 
         [BindProperty]
-        public Estudiante Estudiante { get; set; } = default!;
+        public Horario Horario { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null || _context.Horarios == null)
             {
                 return NotFound();
             }
 
-            var Estudiante = await _context.Estudiantes.FirstOrDefaultAsync(m => m.IdEstudiante == id);
+            var Horario = await _context.Horarios.FirstOrDefaultAsync(m => m.IdHorario == id);
 
-            if (Estudiante == null)
+            if (Horario == null)
             {
                 return NotFound();
             }
             else
             {
-                this.Estudiante = Estudiante;
+                this.Horario = Horario;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null || _context.Horarios == null)
             {
                 return NotFound();
             }
-            var Estudiante = await _context.Estudiantes.FindAsync(id);
+            var Horario = await _context.Horarios.FindAsync(id);
 
-            if (Estudiante != null)
+            if (Horario != null)
             {
-                this.Estudiante = Estudiante;
-                _context.Estudiantes.Remove(Estudiante);
+                this.Horario = Horario;
+                _context.Horarios.Remove(Horario);
                 await _context.SaveChangesAsync();
             }
 

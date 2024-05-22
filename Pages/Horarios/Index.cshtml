@@ -36,7 +36,7 @@
                     @Html.DisplayFor(modelItem => item.HoraFin)
                 </td>               
                 <td>
-
+                    <a asp-page="./Delete" asp-route-id="@item.IdHorario" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
