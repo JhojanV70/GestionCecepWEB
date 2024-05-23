@@ -12,8 +12,8 @@ namespace GestionCecepWEB.Models
         public string NombreCurso { get; set; }
         public string Descripcion { get; set; }
         public int IdProfesor { get; set; } // FK
-       /*public Profesor? Profesor { get; set; } // Propiedad de navegación
-        public ICollection<Estudiante> Estudiantes { get; set; } // Relación uno a muchos*/
+       public Profesor? Profesor { get; set; } // Propiedad de navegación
+        public ICollection<Estudiante?>? Estudiantes { get; set; } // Relación uno a muchos
 
     }
 }
