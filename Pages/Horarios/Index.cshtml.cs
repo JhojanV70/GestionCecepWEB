@@ -16,10 +16,13 @@ namespace GestionCecepWEB.Pages.Horarios
         public IList<Horario> Horarios { get; set; } = default!;
         public async Task OnGetAsync()
         {
+            
             if (_context.Horarios != null)
             {
-                Horarios = await _context.Horarios.ToListAsync();
+                Horarios = await _context.Horarios.ToListAsync();               
+                
             }
+           
         }
     }
 }

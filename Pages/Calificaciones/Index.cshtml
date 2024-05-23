@@ -15,7 +15,13 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Calificaciones[0].Fecha)
-            </th>            
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calificaciones[0].IdEstudiante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calificaciones[0].IdCurso)
+            </th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -28,7 +34,13 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Fecha)
-                </td>                
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEstudiante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCurso)
+                </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.IdCalificacion" class="btn btn-warning">Edit</a>
                     <a asp-page="./Delete" asp-route-id="@item.IdCalificacion" class="btn btn-danger">Delete</a>

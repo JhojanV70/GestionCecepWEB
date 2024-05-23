@@ -2,6 +2,7 @@ using GestionCecepWEB.Data;
 using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestionCecepWEB.Pages.Horarios
 {
@@ -12,11 +13,16 @@ namespace GestionCecepWEB.Pages.Horarios
         {
             _context = context;
         }
-
         public IActionResult OnGet()
         {
+            // Cargar la lista de cursos y asignarla a ViewData
+            ViewData["IdCurso"] = new SelectList(_context.Cursos, "IdCurso", "NombreCurso");
             return Page();
         }
+        /*public IActionResult OnGet()
+        {
+            return Page();
+        }*/
 
         [BindProperty]
         public Horario Horario { get; set; } = default!;

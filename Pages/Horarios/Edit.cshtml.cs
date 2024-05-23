@@ -2,6 +2,7 @@ using GestionCecepWEB.Data;
 using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestionCecepWEB.Pages.Horarios
@@ -9,26 +10,33 @@ namespace GestionCecepWEB.Pages.Horarios
     public class EditModel : PageModel
     {
         private readonly GestionCecepContext _context;
+
         public EditModel(GestionCecepContext context)
         {
             _context = context;
         }
+
         [BindProperty]
-        public Horario Horario { get; set; } = default!;
+        public Horario Horario { get; set; }
+
+        public SelectList Cursos { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Horarios == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var Horario = await _context.Horarios.FirstOrDefaultAsync(m => m.IdHorario == id);
+            Horario = await _context.Horarios.FindAsync(id);
+
             if (Horario == null)
             {
                 return NotFound();
             }
-            this.Horario = Horario;
+
+            Cursos = new SelectList(_context.Cursos, "IdCurso", "NombreCurso", Horario.IdCurso);
+
             return Page();
         }
 
@@ -36,6 +44,7 @@ namespace GestionCecepWEB.Pages.Horarios
         {
             if (!ModelState.IsValid)
             {
+                Cursos = new SelectList(_context.Cursos, "IdCurso", "NombreCurso", Horario.IdCurso);
                 return Page();
             }
 
@@ -47,7 +56,7 @@ namespace GestionCecepWEB.Pages.Horarios
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(Horario.IdHorario))
+                if (!HorarioExists(Horario.IdHorario))
                 {
                     return NotFound();
                 }
@@ -60,9 +69,9 @@ namespace GestionCecepWEB.Pages.Horarios
             return RedirectToPage("./Index");
         }
 
-        private bool CategoryExists(int id)
+        private bool HorarioExists(int id)
         {
-            return (_context.Horarios?.Any(e => e.IdHorario == id)).GetValueOrDefault();
+            return _context.Horarios.Any(e => e.IdHorario == id);
         }
     }
 }

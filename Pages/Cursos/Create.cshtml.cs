@@ -2,6 +2,7 @@ using GestionCecepWEB.Data;
 using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestionCecepWEB.Pages.Cursos
 {
@@ -12,18 +13,18 @@ namespace GestionCecepWEB.Pages.Cursos
         {
             _context = context;
         }
-
         public IActionResult OnGet()
         {
+            ViewData["Profesores"] = new SelectList(_context.Profesores, "IdProfesor", "Nombre");
             return Page();
         }
 
         [BindProperty]
-        public Curso Curso { get; set; } = default!;
+        public Curso Curso { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.Cursos == null || Curso == null)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }

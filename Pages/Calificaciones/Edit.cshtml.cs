@@ -2,6 +2,7 @@ using GestionCecepWEB.Data;
 using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestionCecepWEB.Pages.Calificaciones
@@ -14,21 +15,28 @@ namespace GestionCecepWEB.Pages.Calificaciones
             _context = context;
         }
         [BindProperty]
-        public Calificacion Calificacion { get; set; } = default!;
+        public Calificacion Calificacion { get; set; }
+
+        public SelectList Estudiantes { get; set; }
+        public SelectList Cursos { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Calificaciones == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var Calificacion = await _context.Calificaciones.FirstOrDefaultAsync(m => m.IdCalificacion == id);
+            Calificacion = await _context.Calificaciones.FindAsync(id);
+
             if (Calificacion == null)
             {
                 return NotFound();
             }
-            this.Calificacion = Calificacion;
+
+            Estudiantes = new SelectList(_context.Estudiantes, "IdEstudiante", "Nombre");
+            Cursos = new SelectList(_context.Cursos, "IdCurso", "NombreCurso");
+
             return Page();
         }
 
@@ -36,6 +44,8 @@ namespace GestionCecepWEB.Pages.Calificaciones
         {
             if (!ModelState.IsValid)
             {
+                Estudiantes = new SelectList(_context.Estudiantes, "IdEstudiante", "Nombre");
+                Cursos = new SelectList(_context.Cursos, "IdCurso", "NombreCurso");
                 return Page();
             }
 
@@ -47,7 +57,7 @@ namespace GestionCecepWEB.Pages.Calificaciones
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(Calificacion.IdCalificacion))
+                if (!CalificacionExists(Calificacion.IdCalificacion))
                 {
                     return NotFound();
                 }
@@ -60,10 +70,9 @@ namespace GestionCecepWEB.Pages.Calificaciones
             return RedirectToPage("./Index");
         }
 
-        private bool CategoryExists(int id)
+        private bool CalificacionExists(int id)
         {
-            return (_context.Calificaciones?.Any(e => e.IdCalificacion == id)).GetValueOrDefault();
+            return _context.Calificaciones.Any(e => e.IdCalificacion == id);
         }
     }
 }
-

@@ -2,6 +2,7 @@ using GestionCecepWEB.Data;
 using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestionCecepWEB.Pages.Cursos
@@ -14,21 +15,27 @@ namespace GestionCecepWEB.Pages.Cursos
             _context = context;
         }
         [BindProperty]
-        public Curso Curso { get; set; } = default!;
+        public Curso Curso { get; set; }
+
+        public SelectList Profesores { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Cursos == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var Curso = await _context.Cursos.FirstOrDefaultAsync(m => m.IdCurso == id);
+            Curso = await _context.Cursos.FindAsync(id);
+
             if (Curso == null)
             {
                 return NotFound();
             }
-            this.Curso = Curso;
+
+            // Obtener la lista de profesores y seleccionar el profesor actual del curso
+            Profesores = new SelectList(_context.Profesores, "IdProfesor", "Nombre", Curso.IdProfesor);
+
             return Page();
         }
 
@@ -47,7 +54,7 @@ namespace GestionCecepWEB.Pages.Cursos
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(Curso.IdCurso))
+                if (!CursoExists(Curso.IdCurso))
                 {
                     return NotFound();
                 }
@@ -60,9 +67,9 @@ namespace GestionCecepWEB.Pages.Cursos
             return RedirectToPage("./Index");
         }
 
-        private bool CategoryExists(int id)
+        private bool CursoExists(int id)
         {
-            return (_context.Cursos?.Any(e => e.IdCurso == id)).GetValueOrDefault();
+            return _context.Cursos.Any(e => e.IdCurso == id);
         }
     }
 }

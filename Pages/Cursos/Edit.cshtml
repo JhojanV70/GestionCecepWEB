@@ -1,12 +1,11 @@
 ﻿@page
 @model GestionCecepWEB.Pages.Cursos.EditModel
 @{
-    ViewData["Title"] = "Edit Cursos";
+    ViewData["Title"] = "Edit";
 }
+
 <h1>Edit</h1>
 
-<h4>Cursos</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -22,10 +21,15 @@
                 <input asp-for="Curso.Descripcion" class="form-control" />
                 <span asp-validation-for="Curso.Descripcion" class="text-danger"></span>
             </div>
-            <div class="form group">
-                <input type="submit" value="Save" class="btn btn-success" />
-                <a asp-page="./index" class="btn btn-primary">Back to List</a>
+            <div class="form-group">
+                <label asp-for="Curso.IdProfesor" class="control-label"></label>
+                <select asp-for="Curso.IdProfesor" class="form-control" asp-items="@Model.Profesores">
+                    <option value="">Seleccione un profesor</option>
+                </select>
+                <span asp-validation-for="Curso.IdProfesor" class="text-danger"></span>
             </div>
+            <!-- Agregar más campos según sea necesario -->
+            <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 </div>

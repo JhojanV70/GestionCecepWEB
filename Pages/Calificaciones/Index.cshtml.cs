@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GestionCecepWEB.Pages.Calificaciones
 {
+   
     public class IndexModel : PageModel
     {
         private readonly GestionCecepContext _context;

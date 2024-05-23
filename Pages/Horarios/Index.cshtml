@@ -18,7 +18,10 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Horarios[0].HoraFin)
-            </th>            
+            </th> 
+            <th>
+                @Html.DisplayNameFor(model => model.Horarios[0].IdCurso)
+            </th>           
             <th>Actions</th>
         </tr>
     </thead>
@@ -34,7 +37,10 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HoraFin)
-                </td>               
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCurso)
+                </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.IdHorario" class="btn btn-warning">Edit</a>
                     <a asp-page="./Delete" asp-route-id="@item.IdHorario" class="btn btn-danger">Delete</a>

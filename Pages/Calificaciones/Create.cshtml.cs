@@ -2,6 +2,7 @@ using GestionCecepWEB.Data;
 using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestionCecepWEB.Pages.Calificaciones
 {
@@ -13,18 +14,25 @@ namespace GestionCecepWEB.Pages.Calificaciones
             _context = context;
         }
 
-        public IActionResult OnGet()
+        [BindProperty]
+        public Calificacion Calificacion { get; set; }
+
+        public SelectList Estudiantes { get; set; }
+        public SelectList Cursos { get; set; }
+
+        public async Task<IActionResult> OnGetAsync()
         {
+            Estudiantes = new SelectList(_context.Estudiantes, "IdEstudiante", "Nombre");
+            Cursos = new SelectList(_context.Cursos, "IdCurso", "NombreCurso");
             return Page();
         }
 
-        [BindProperty]
-        public Calificacion Calificacion { get; set; } = default!;
-
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.Calificaciones == null || Calificacion == null)
+            if (!ModelState.IsValid)
             {
+                Estudiantes = new SelectList(_context.Estudiantes, "IdEstudiante", "Nombre");
+                Cursos = new SelectList(_context.Cursos, "IdCurso", "NombreCurso");
                 return Page();
             }
 
@@ -35,3 +43,4 @@ namespace GestionCecepWEB.Pages.Calificaciones
         }
     }
 }
+    
