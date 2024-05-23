@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using GestionCecepWEB.Data;
 using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
-namespace GestionCecepWEB.Pages.Estudiantes
+namespace GestionCecepWEB.Pages.Cursos
 {
     [Authorize]
     public class IndexModel : PageModel
@@ -15,12 +15,12 @@ namespace GestionCecepWEB.Pages.Estudiantes
         {
             _context = context;
         }
-        public IList<Estudiante> Estudiantes { get; set; } = default!;
+        public IList<Curso> Cursos { get; set; } = default!;
         public async Task OnGetAsync()
         {
-            if (_context.Estudiantes != null)
+            if (_context.Cursos != null)
             {
-                Estudiantes = await _context.Estudiantes.ToListAsync();
+                Cursos = await _context.Cursos.ToListAsync();
             }
         }
     }

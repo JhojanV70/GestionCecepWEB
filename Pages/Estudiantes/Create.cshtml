@@ -1,7 +1,7 @@
 ﻿@page
 @model GestionCecepWEB.Pages.Estudiantes.CreateModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Estudiantes";
 }
 <h1>Create</h1>
 <h4>Estudiante</h4>
@@ -39,6 +39,11 @@
                 <label asp-for="Estudiante.Direccion" class="control-label"></label>
                 <input asp-for="Estudiante.Direccion" class="form-control" />
                 <span asp-validation-for="Estudiante.Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estudiante.IdCurso" class="control-label"></label>
+                <select asp-for="Estudiante.IdCurso" class="form-control" asp-items="@(new SelectList(ViewData["IdCurso"] as IEnumerable<SelectListItem>, "Value", "Text"))"></select>
+                <span asp-validation-for="Estudiante.IdCurso" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-success" />

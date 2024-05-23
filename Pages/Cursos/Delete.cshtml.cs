@@ -1,10 +1,10 @@
+using GestionCecepWEB.Data;
+using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using GestionCecepWEB.Data;
-using GestionCecepWEB.Models;
 
-namespace GestionCecepWEB.Pages.Estudiantes
+namespace GestionCecepWEB.Pages.Cursos
 {
     public class DeleteModel : PageModel
     {
@@ -15,40 +15,40 @@ namespace GestionCecepWEB.Pages.Estudiantes
         }
 
         [BindProperty]
-        public Estudiante Estudiante { get; set; } = default!;
+        public Curso Curso { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null || _context.Cursos == null)
             {
                 return NotFound();
             }
 
-            var Estudiante = await _context.Estudiantes.FirstOrDefaultAsync(m => m.IdEstudiante == id);
+            var Curso = await _context.Cursos.FirstOrDefaultAsync(m => m.IdCurso == id);
 
-            if (Estudiante == null)
+            if (Curso == null)
             {
                 return NotFound();
             }
             else
             {
-                this.Estudiante = Estudiante;
+                this.Curso = Curso;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null || _context.Cursos == null)
             {
                 return NotFound();
             }
-            var Estudiante = await _context.Estudiantes.FindAsync(id);
+            var Curso = await _context.Cursos.FindAsync(id);
 
-            if (Estudiante != null)
+            if (Curso != null)
             {
-                this.Estudiante = Estudiante;
-                _context.Estudiantes.Remove(Estudiante);
+                this.Curso = Curso;
+                _context.Cursos.Remove(Curso);
                 await _context.SaveChangesAsync();
             }
 

@@ -1,10 +1,10 @@
+using GestionCecepWEB.Data;
+using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using GestionCecepWEB.Data;
-using GestionCecepWEB.Models;
 
-namespace GestionCecepWEB.Pages.Estudiantes
+namespace GestionCecepWEB.Pages.Profesores
 {
     public class DeleteModel : PageModel
     {
@@ -15,40 +15,40 @@ namespace GestionCecepWEB.Pages.Estudiantes
         }
 
         [BindProperty]
-        public Estudiante Estudiante { get; set; } = default!;
+        public Profesor Profesor { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null || _context.Profesores == null)
             {
                 return NotFound();
             }
 
-            var Estudiante = await _context.Estudiantes.FirstOrDefaultAsync(m => m.IdEstudiante == id);
+            var Profesor = await _context.Profesores.FirstOrDefaultAsync(m => m.IdProfesor == id);
 
-            if (Estudiante == null)
+            if (Profesor == null)
             {
                 return NotFound();
             }
             else
             {
-                this.Estudiante = Estudiante;
+                this.Profesor = Profesor;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null || _context.Profesores == null)
             {
                 return NotFound();
             }
-            var Estudiante = await _context.Estudiantes.FindAsync(id);
+            var Profesor = await _context.Profesores.FindAsync(id);
 
-            if (Estudiante != null)
+            if (Profesor != null)
             {
-                this.Estudiante = Estudiante;
-                _context.Estudiantes.Remove(Estudiante);
+                this.Profesor = Profesor;
+                _context.Profesores.Remove(Profesor);
                 await _context.SaveChangesAsync();
             }
 

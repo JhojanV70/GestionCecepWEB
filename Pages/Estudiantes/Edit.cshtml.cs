@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GestionCecepWEB.Data;
 using GestionCecepWEB.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestionCecepWEB.Pages.Estudiantes
 {
@@ -14,22 +15,34 @@ namespace GestionCecepWEB.Pages.Estudiantes
         {
             _context = context;
         }
+
+        public List<SelectListItem> Cursos { get; set; }
+
         [BindProperty]
-        public Estudiante Estudiante { get; set; } = default!;
+        public Estudiante Estudiante { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var Estudiante = await _context.Estudiantes.FirstOrDefaultAsync(m => m.IdEstudiante == id);
+            Estudiante = await _context.Estudiantes.FindAsync(id);
+
             if (Estudiante == null)
             {
                 return NotFound();
             }
-            this.Estudiante = Estudiante;
+
+            Cursos = await _context.Cursos.Select(c =>
+                new SelectListItem
+                {
+                    Value = c.IdCurso.ToString(),
+                    Text = c.NombreCurso,
+                    Selected = (c.IdCurso == Estudiante.IdCurso)
+                }).ToListAsync();
+
             return Page();
         }
 
@@ -37,6 +50,28 @@ namespace GestionCecepWEB.Pages.Estudiantes
         {
             if (!ModelState.IsValid)
             {
+                Cursos = await _context.Cursos.Select(c =>
+                    new SelectListItem
+                    {
+                        Value = c.IdCurso.ToString(),
+                        Text = c.NombreCurso,
+                        Selected = (c.IdCurso == Estudiante.IdCurso)
+                    }).ToListAsync();
+                return Page();
+            }
+
+            var Curso = await _context.Cursos.FindAsync(Estudiante.IdCurso);
+
+            if (Curso == null)
+            {
+                ModelState.AddModelError("", "Invalid category selected.");
+                Cursos = await _context.Cursos.Select(c =>
+                    new SelectListItem
+                    {
+                        Value = c.IdCurso.ToString(),
+                        Text = c.NombreCurso,
+                        Selected = (c.IdCurso == Estudiante.IdCurso)
+                    }).ToListAsync();
                 return Page();
             }
 
@@ -48,7 +83,7 @@ namespace GestionCecepWEB.Pages.Estudiantes
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(Estudiante.IdEstudiante))
+                if (!ProductExists(Estudiante.IdCurso))
                 {
                     return NotFound();
                 }
@@ -61,9 +96,9 @@ namespace GestionCecepWEB.Pages.Estudiantes
             return RedirectToPage("./Index");
         }
 
-        private bool CategoryExists(int id)
+        private bool ProductExists(int id)
         {
-            return (_context.Estudiantes?.Any(e => e.IdEstudiante == id)).GetValueOrDefault();
+            return _context.Estudiantes.Any(p => p.IdEstudiante == id);
         }
     }
 }

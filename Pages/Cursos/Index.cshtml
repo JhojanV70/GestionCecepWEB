@@ -1,0 +1,46 @@
+﻿@page
+@model GestionCecepWEB.Pages.Cursos.IndexModel
+@{
+    ViewData["Title"] = "Index Cursos";
+}
+<h1>Index Cursos</h1>
+<p>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cursos[0].NombreCurso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cursos[0].Descripcion)
+            </th>   
+            <th>
+                @Html.DisplayNameFor(model => model.Cursos[0].IdProfesor)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cursos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCurso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProfesor)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.IdCurso" class="btn btn-warning">Edit</a>
+                    <a asp-page="./Delete" asp-route-id="@item.IdCurso" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

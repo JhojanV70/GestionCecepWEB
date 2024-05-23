@@ -1,10 +1,10 @@
+using GestionCecepWEB.Data;
+using GestionCecepWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using GestionCecepWEB.Data;
-using GestionCecepWEB.Models;
 
-namespace GestionCecepWEB.Pages.Estudiantes
+namespace GestionCecepWEB.Pages.Calificaciones
 {
     public class DeleteModel : PageModel
     {
@@ -15,40 +15,40 @@ namespace GestionCecepWEB.Pages.Estudiantes
         }
 
         [BindProperty]
-        public Estudiante Estudiante { get; set; } = default!;
+        public Calificacion Calificacion { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null || _context.Calificaciones == null)
             {
                 return NotFound();
             }
 
-            var Estudiante = await _context.Estudiantes.FirstOrDefaultAsync(m => m.IdEstudiante == id);
+            var Calificacion = await _context.Calificaciones.FirstOrDefaultAsync(m => m.IdCalificacion == id);
 
-            if (Estudiante == null)
+            if (Calificacion == null)
             {
                 return NotFound();
             }
             else
             {
-                this.Estudiante = Estudiante;
+                this.Calificacion = Calificacion;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Estudiantes == null)
+            if (id == null || _context.Calificaciones == null)
             {
                 return NotFound();
             }
-            var Estudiante = await _context.Estudiantes.FindAsync(id);
+            var Calificacion = await _context.Calificaciones.FindAsync(id);
 
-            if (Estudiante != null)
+            if (Calificacion != null)
             {
-                this.Estudiante = Estudiante;
-                _context.Estudiantes.Remove(Estudiante);
+                this.Calificacion = Calificacion;
+                _context.Calificaciones.Remove(Calificacion);
                 await _context.SaveChangesAsync();
             }
 

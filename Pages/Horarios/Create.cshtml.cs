@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace GestionCecepWEB.Pages.Estudiantes
+namespace GestionCecepWEB.Pages.Horarios
 {
     public class CreateModel : PageModel
     {
@@ -19,29 +19,25 @@ namespace GestionCecepWEB.Pages.Estudiantes
             ViewData["IdCurso"] = new SelectList(_context.Cursos, "IdCurso", "NombreCurso");
             return Page();
         }
-
-       /* public IActionResult OnGet()
+        /*public IActionResult OnGet()
         {
             return Page();
         }*/
 
         [BindProperty]
-        public Estudiante Estudiante { get; set; } = default!;
+        public Horario Horario { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!ModelState.IsValid || _context.Horarios == null || Horario == null)
+            {
+                return Page();
+            }
 
-            
-            if (!ModelState.IsValid || _context.Estudiantes == null || Estudiante == null)
-             {
-                 return Page();
-             }
-
-            _context.Estudiantes.Add(Estudiante);
+            _context.Horarios.Add(Horario);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
-          
-        }   
+        }
     }
 }

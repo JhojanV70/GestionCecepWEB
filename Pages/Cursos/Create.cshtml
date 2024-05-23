@@ -1,0 +1,34 @@
+﻿@page
+@model GestionCecepWEB.Pages.Cursos.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Curso.NombreCurso" class="control-label"></label>
+                <input asp-for="Curso.NombreCurso" class="form-control" />
+                <span asp-validation-for="Curso.NombreCurso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Curso.Descripcion" class="control-label"></label>
+                <input asp-for="Curso.Descripcion" class="form-control" />
+                <span asp-validation-for="Curso.Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Curso.IdProfesor" class="control-label"></label>
+                <select asp-for="Curso.IdProfesor" class="form-control" asp-items="ViewBag.Profesores">
+                    <option value="">Seleccione un profesor</option>
+                </select>
+                <span asp-validation-for="Curso.IdProfesor" class="text-danger"></span>
+            </div>
+            <!-- Agregar más campos según sea necesario -->
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@page
+@model GestionCecepWEB.Pages.Horarios.DeleteModel
+@{
+    ViewData["Title"] = "Delete Horarios";
+}
+<h1>Delete</h1>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Horarios</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Horario.DiaSemana)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Horario.DiaSemana)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Horario.HoraInicio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Horario.HoraInicio)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Horario.HoraFin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Horario.HoraFin)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Horario.IdHorario" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+    </form>
+</div>

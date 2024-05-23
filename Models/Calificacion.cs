@@ -6,8 +6,8 @@ namespace GestionCecepWEB.Models
     {
         [Key] // Esto define IdCalificacion como la clave primaria
         public int IdCalificacion { get; set; }
-        public int IdEstudiante { get; set; }
-        public int IdCurso { get; set; }
+        public int IdEstudiante { get; set; } //FK
+        public int IdCurso { get; set; } //FK
         public float Nota { get; set; }
         public DateTime Fecha { get; set; }
     }

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace GestionCecepWEB.Models
 {
@@ -9,8 +12,8 @@ namespace GestionCecepWEB.Models
         public string NombreCurso { get; set; }
         public string Descripcion { get; set; }
         public int IdProfesor { get; set; } // FK
-        public Profesor? Profesor { get; set; } // Propiedad de navegación
-        public ICollection<Estudiante> Estudiantes { get; set; } // Relación uno a muchos
+       public Profesor? Profesor { get; set; } // Propiedad de navegación
+        public ICollection<Estudiante?>? Estudiantes { get; set; } // Relación uno a muchos
 
     }
 }

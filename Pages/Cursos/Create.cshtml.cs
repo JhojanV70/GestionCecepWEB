@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace GestionCecepWEB.Pages.Estudiantes
+namespace GestionCecepWEB.Pages.Cursos
 {
     public class CreateModel : PageModel
     {
@@ -15,33 +15,24 @@ namespace GestionCecepWEB.Pages.Estudiantes
         }
         public IActionResult OnGet()
         {
-            // Cargar la lista de cursos y asignarla a ViewData
-            ViewData["IdCurso"] = new SelectList(_context.Cursos, "IdCurso", "NombreCurso");
+            ViewData["Profesores"] = new SelectList(_context.Profesores, "IdProfesor", "Nombre");
             return Page();
         }
 
-       /* public IActionResult OnGet()
-        {
-            return Page();
-        }*/
-
         [BindProperty]
-        public Estudiante Estudiante { get; set; } = default!;
+        public Curso Curso { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-            
-            if (!ModelState.IsValid || _context.Estudiantes == null || Estudiante == null)
-             {
-                 return Page();
-             }
-
-            _context.Estudiantes.Add(Estudiante);
+            _context.Cursos.Add(Curso);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
-          
-        }   
+        }
     }
 }

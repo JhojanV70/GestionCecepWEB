@@ -1,0 +1,51 @@
+﻿@page
+@model GestionCecepWEB.Pages.Calificaciones.IndexModel
+@{
+    ViewData["Title"] = "Index Calificaciones";
+}
+<h1>Index Calificaciones</h1>
+<p>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Calificaciones[0].Nota)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calificaciones[0].Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calificaciones[0].IdEstudiante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calificaciones[0].IdCurso)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Calificaciones)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nota)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEstudiante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCurso)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.IdCalificacion" class="btn btn-warning">Edit</a>
+                    <a asp-page="./Delete" asp-route-id="@item.IdCalificacion" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
