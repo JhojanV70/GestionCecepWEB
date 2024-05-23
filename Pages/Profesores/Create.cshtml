@@ -1,0 +1,50 @@
+﻿@page
+@model GestionCecepWEB.Pages.Profesores.CreateModel
+@{
+    ViewData["Title"] = "Create Profesores";
+}
+<h1>Create</h1>
+<h4>Profesores</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Profesor.Nombre" class="control-label"></label>
+                <input asp-for="Profesor.Nombre" class="form-control" />
+                <span asp-validation-for="Profesor.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Profesor.Apellido" class="control-label"></label>
+                <input asp-for="Profesor.Apellido" class="form-control" />
+                <span asp-validation-for="Profesor.Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Profesor.Especialidad" class="control-label"></label>
+                <input asp-for="Profesor.Especialidad" class="form-control" />
+                <span asp-validation-for="Profesor.Especialidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Profesor.Email" class="control-label"></label>
+                <input asp-for="Profesor.Email" class="form-control" />
+                <span asp-validation-for="Profesor.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Profesor.Telefono" class="control-label"></label>
+                <input asp-for="Profesor.Telefono" class="form-control" />
+                <span asp-validation-for="Profesor.Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a asp-page="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
